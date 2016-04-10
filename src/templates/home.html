@@ -1,0 +1,78 @@
+<section class="section container-fluid">
+  <div class="scrollable">
+ <div class="scrollable-content section">
+   
+  <form name="mainController.orderForm" role="form" ng-submit='generatePaymentLinks()'>
+    <fieldset>
+      <legend>Order details</legend>
+        <div class="form-group">
+          <label>Order#</label>
+          <input ng-model="orderNo"
+          		 type="text"
+                 class="form-control"
+                 placeholder="" required>
+        </div>
+
+        <div class="form-group">
+          <label>Product name</label>
+          <input ng-model="productName"
+          		 type="text"
+                 class="form-control"
+                 placeholder="Product name" required>
+        </div>
+
+        <div class="form-group">
+          <label>Quantity</label>
+          <input ng-model="quantity"
+          		 type="number"
+                 class="form-control"
+                 placeholder="Quantity" required>
+        </div>
+
+        <div class="form-group">
+          <label>Price</label>
+          <input ng-model="price"
+          		 type="number" 
+                 class="form-control"
+                 placeholder="Unit Price in HKD" required>
+        </div>
+
+    </fieldset>
+    <hr>
+
+    <button class="btn btn-primary btn-block">
+      Generate payment links
+    </button>
+
+    
+
+  </form>
+ </div>
+</div>
+
+<!-- result popup -->
+<div ui-content-for="modals">
+  <div class="modal" ui-if="event" ui-state="event">
+    <div class="modal-backdrop in">
+    </div>
+  
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button class="close" ui-turn-off="event">x</button>
+          <h4 class="modal-title">Share to...</h4>
+        </div>
+      
+        <div class="modal-body">
+        	<button ng-click="shareToWhatsapp()"><i class="fa fa-whatsapp fa-5x"></i></button>
+        </div>
+        <div class="modal-footer">
+          <button ui-turn-off="event" class="btn btn-default" ng-click='reloadRoute()'>OK</button>
+          <button ui-turn-off="event" class="btn btn-primary">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</section>
