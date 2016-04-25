@@ -10,10 +10,9 @@ angular.module('LoftPayment.controllers.Main', [])
   $scope.generatePaymentLinks = function(){
   	console.log('orderNo:'+this.orderNo);
   	console.log('productName:'+this.productName);
-  	console.log('quantity:'+this.quantity);
   	console.log('price:'+this.price);
 
-  	redirectPaymentUrl = paypalUrl+'business='+paypalBusinessAcc+'&currency_code=HKD&amount='+this.price+'&item_name='+encodeURIComponent(this.productName)+'&invoice='+this.orderNo+'&quantity='+this.quantity+'&charset=utf-8';
+  	redirectPaymentUrl = paypalUrl+'business='+paypalBusinessAcc+'&currency_code=HKD&amount='+this.price+'&item_name='+encodeURIComponent(this.productName)+'&invoice='+this.orderNo+'&quantity=1&charset=utf-8';
 
   	console.log(redirectPaymentUrl);
   	SharedState.initialize($scope, 'event');
@@ -21,9 +20,14 @@ angular.module('LoftPayment.controllers.Main', [])
   };
 
   $scope.shareToWhatsapp = function(){
-  	var whatsappUrl = "whatsapp://send?text=" + encodeURIComponent('Please pay through PayPal link below') + ' - ' + encodeURIComponent(redirectPaymentUrl);
-  	console.log('Share to: ' + whatsappUrl);
-  	window.location.href = whatsappUrl;
+  	var sharingUrl = redirectPaymentUrl;
+    var clipboard = new Clipboard('.btn', {
+    text: function(trigger) {
+        return sharingUrl;
+    }
+});
+  	//console.log('Share to: ' + whatsappUrl);
+  	//window.location.href = whatsappUrl;
   };
 
   $scope.reloadRoute = function(){
