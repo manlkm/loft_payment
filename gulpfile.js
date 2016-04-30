@@ -9,10 +9,12 @@
 
 var config = {
   dest: 'www',
+  cssDest: 'www/css',
   cordova: true,
   less: {
     src: [
-      './src/less/app.less', './src/less/responsive.less'
+      './src/less/app.less', 
+      './src/less/responsive.less'
     ],
     paths: [
       './src/less', './bower_components'
@@ -26,10 +28,9 @@ var config = {
       './node_modules/clipboard/dist/clipboard.js'
     ],
 
-    css: {
-      prepend: [],
-      append: [],
-    },
+    css: [
+    
+    ],
 
     fonts: [
       './bower_components/font-awesome/fonts/fontawesome-webfont.*'
@@ -180,6 +181,13 @@ gulp.task('html', function() {
   .pipe(gulp.dest(config.dest));
 });
 
+/*=================================================
+=            Copy css files to dest              =
+=================================================*/
+gulp.task('css', function(){
+  gulp.src(config.vendor.css)
+  .pipe(gulp.dest(config.cssDest));
+});
 
 /*======================================================================
 =            Compile, minify, mobilize less                            =
@@ -264,7 +272,7 @@ gulp.task('weinre', function() {
 ======================================*/
 
 gulp.task('build', function(done) {
-  var tasks = ['html', 'fonts', 'images', 'less', 'js'];
+  var tasks = ['html', 'fonts', 'images', 'less', 'css', 'js'];
   seq('clean', tasks, done);
 });
 
