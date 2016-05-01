@@ -6,7 +6,17 @@ angular.module('LoftPayment.controllers.Main', [])
     $scope.orderNo = ((now.getFullYear()) + ''+ ((now.getMonth()+1)<10?'0'+(now.getMonth()+1):((now.getMonth()+1)))+''+ now.getDate() + "" + now.getHours() + ''
                      + ((now.getMinutes() < 10) ? ("0" + now.getMinutes()) : (now.getMinutes())) + '' + ((now.getSeconds() < 10) ? ("0" + now
                      .getSeconds()) : (now.getSeconds())));
-   
+  
+  var clipboard = new Clipboard('.cpBtn');
+    clipboard.on('success', function(e) {
+        alert('copied');
+        e.clearSelection();
+    });
+    clipboard.on('error', function(e) {
+        alert("Text selected only")
+    });
+
+
   var redirectPaymentUrl = '';
   $scope.generatePaymentLinks = function(){
   	console.log('orderNo:'+this.orderNo);
@@ -19,7 +29,8 @@ angular.module('LoftPayment.controllers.Main', [])
   	console.log(redirectPaymentUrl);
   	SharedState.initialize($scope, 'event');
     SharedState.turnOn('event');
-    console.log('test2');
+
+    this.redirectPaymentUrlInput = redirectPaymentUrl;
   };
 
   $scope.copyLink = function(){

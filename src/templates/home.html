@@ -65,7 +65,8 @@
         </div>
       
         <div class="modal-body">
-        	<button class="cpBtn btn btn-primary btn-block" ng-click="copyLink()">Copy to clipboard</button>
+          <textarea readonly rows="4" style="width:100%;" id="redirectPaymentUrlInput" ng-model="redirectPaymentUrlInput"></textarea>
+        	<button data-clipboard-action="copy" data-clipboard-target="#redirectPaymentUrlInput" class="cpBtn btn btn-primary btn-block" >Copy to clipboard</button>
         </div>
         <div class="modal-footer">
           <button ui-turn-off="event" class="btn btn-default" ng-click='reloadRoute()'>Complete & Go to homepage</button>
